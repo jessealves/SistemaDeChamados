@@ -52,7 +52,7 @@ public class JFrame_Tela_Principal extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(147, 205, 128));
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/1442957129_document-open.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/ICON_Novo_Chamado.png"))); // NOI18N
         jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel2MouseClicked(evt);
@@ -142,7 +142,7 @@ public class JFrame_Tela_Principal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 631, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 629, Short.MAX_VALUE)
         );
 
         setSize(new java.awt.Dimension(1116, 688));
