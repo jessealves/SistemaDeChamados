@@ -154,7 +154,7 @@ public class JFrame_Cadastro_Usuarios extends javax.swing.JFrame {
        String nome = jT_NomeUsuario.getText();
        
        if(nome.equals("")){
-           JOptionPane.showMessageDialog(null, "Campo Nome não pode ser vazio.");
+           JOptionPane.showMessageDialog(null, "Campo Nome não pode ser vazio.","Erro de Preenchimento",0);
        }
     }//GEN-LAST:event_jB_SalvarUsuarioActionPerformed
 
