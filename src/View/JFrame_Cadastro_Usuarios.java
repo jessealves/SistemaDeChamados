@@ -5,6 +5,8 @@
  */
 package View;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Cpd
@@ -56,7 +58,12 @@ public class JFrame_Cadastro_Usuarios extends javax.swing.JFrame {
 
         jLabel4.setText("Senha:");
 
-        jB_SalvarUsuario.setText("jButton1");
+        jB_SalvarUsuario.setText("Salvar");
+        jB_SalvarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_SalvarUsuarioActionPerformed(evt);
+            }
+        });
 
         jB_LimparCampos.setText("jButton2");
 
@@ -98,7 +105,7 @@ public class JFrame_Cadastro_Usuarios extends javax.swing.JFrame {
                         .addComponent(jB_Cancelar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jB_Sair)))
-                .addContainerGap(389, Short.MAX_VALUE))
+                .addContainerGap(399, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -142,6 +149,14 @@ public class JFrame_Cadastro_Usuarios extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(816, 638));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jB_SalvarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_SalvarUsuarioActionPerformed
+       String nome = jT_NomeUsuario.getText();
+       
+       if(nome.equals("")){
+           JOptionPane.showMessageDialog(null, "Campo Nome não pode ser vazio.");
+       }
+    }//GEN-LAST:event_jB_SalvarUsuarioActionPerformed
 
     /**
      * @param args the command line arguments
