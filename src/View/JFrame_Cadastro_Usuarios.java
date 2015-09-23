@@ -5,7 +5,13 @@
  */
 package View;
 
+import Controller.Usuario_Controller;
+import Model.Usuario_Model;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.SimpleFormatter;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -16,8 +22,28 @@ public class JFrame_Cadastro_Usuarios extends javax.swing.JFrame {
     /**
      * Creates new form JFrame_Cadastro_Usuarios
      */
+    SimpleDateFormat FormatoData;
+    Date DataAtual;
+    
+    Usuario_Model Usuario_M;
+    Usuario_Controller Usuario_C;
+    
+    DefaultTableModel ModeloTabela;
+    
     public JFrame_Cadastro_Usuarios() {
         initComponents();
+        
+        FormatoData = new SimpleDateFormat("dd/MM/YYYY");
+        DataAtual = new Date();
+        jD_Data_Cadastro.setDate(DataAtual);
+        
+        Usuario_M = new Usuario_Model();
+        Usuario_C = new Usuario_Controller();
+        
+        ModeloTabela = (DefaultTableModel) jTable_Usuario.getModel();
+        
+        //AO CLICAR EM NOVO, SETA NO CAMPO DE CODIGO, QUAL SERÁ O PRÓXIMO CÓDIGO DISPONIVEL NO BANCO.
+        jT_Codigo_User.setText(Usuario_C.controleDeCodigo());
     }
 
     /**
@@ -33,25 +59,28 @@ public class JFrame_Cadastro_Usuarios extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jC_Setor = new javax.swing.JComboBox();
         jP_Senha = new javax.swing.JPasswordField();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jD_Data_Cadastro = new com.toedter.calendar.JDateChooser();
         jT_NomeUsuario = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jT_Codigo_User = new javax.swing.JTextField();
         jT_Login = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        jC_Status = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTable_Usuario = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jB_Sair = new javax.swing.JButton();
         jB_SalvarUsuario = new javax.swing.JButton();
         jB_LimparCampos = new javax.swing.JButton();
         jB_Cancelar = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        jC_Pesquisar_Por = new javax.swing.JComboBox();
+        jT_Pesquisar_Usuario = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -64,7 +93,7 @@ public class JFrame_Cadastro_Usuarios extends javax.swing.JFrame {
         jC_Setor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tecnologia e Informação" }));
         jC_Setor.setEnabled(false);
 
-        jDateChooser1.setEnabled(false);
+        jD_Data_Cadastro.setEnabled(false);
 
         jT_NomeUsuario.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -76,7 +105,8 @@ public class JFrame_Cadastro_Usuarios extends javax.swing.JFrame {
 
         jLabel1.setText("Nome:");
 
-        jTextField1.setEnabled(false);
+        jT_Codigo_User.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jT_Codigo_User.setEnabled(false);
 
         jT_Login.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jT_Login.setEnabled(false);
@@ -91,8 +121,8 @@ public class JFrame_Cadastro_Usuarios extends javax.swing.JFrame {
 
         jLabel7.setText("Status:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ativo(a)", "Inativo(a)", "Bloqueado(a)" }));
-        jComboBox1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jC_Status.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ativo(a)", "Inativo(a)", "Bloqueado(a)" }));
+        jC_Status.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -104,15 +134,15 @@ public class JFrame_Cadastro_Usuarios extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jT_Codigo_User, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jD_Data_Cadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, 0, 195, Short.MAX_VALUE))
+                        .addComponent(jC_Status, 0, 195, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -142,12 +172,12 @@ public class JFrame_Cadastro_Usuarios extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel6)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jT_Codigo_User, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel5))
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jD_Data_Cadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel7)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jC_Status, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -163,8 +193,8 @@ public class JFrame_Cadastro_Usuarios extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTable1.setBackground(new java.awt.Color(167, 212, 145));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTable_Usuario.setBackground(new java.awt.Color(167, 212, 145));
+        jTable_Usuario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -180,12 +210,17 @@ public class JFrame_Cadastro_Usuarios extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.setGridColor(new java.awt.Color(167, 212, 145));
-        jScrollPane1.setViewportView(jTable1);
+        jTable_Usuario.setGridColor(new java.awt.Color(167, 212, 145));
+        jScrollPane1.setViewportView(jTable_Usuario);
 
         jPanel3.setBackground(new java.awt.Color(167, 212, 145));
 
         jB_Sair.setText("Sair");
+        jB_Sair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_SairActionPerformed(evt);
+            }
+        });
 
         jB_SalvarUsuario.setText("Salvar");
         jB_SalvarUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -233,6 +268,21 @@ public class JFrame_Cadastro_Usuarios extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jLabel8.setText("Pesquisar usuário por:");
+
+        jC_Pesquisar_Por.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Nome", "Setor", "Código" }));
+
+        jT_Pesquisar_Usuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jT_Pesquisar_UsuarioMouseClicked(evt);
+            }
+        });
+        jT_Pesquisar_Usuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jT_Pesquisar_UsuarioKeyPressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -240,11 +290,18 @@ public class JFrame_Cadastro_Usuarios extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jC_Pesquisar_Por, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jT_Pesquisar_Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -252,6 +309,11 @@ public class JFrame_Cadastro_Usuarios extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(jC_Pesquisar_Por, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jT_Pesquisar_Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -270,16 +332,20 @@ public class JFrame_Cadastro_Usuarios extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        setSize(new java.awt.Dimension(659, 353));
+        setSize(new java.awt.Dimension(659, 379));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jB_SalvarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_SalvarUsuarioActionPerformed
         String nome = jT_NomeUsuario.getText();
 
-        if (nome.equals("")) {
-            JOptionPane.showMessageDialog(null, "Campo Nome não pode ser vazio.", "Erro de Preenchimento", 0);
-        }
+        popularUsuario();
+        
+        Usuario_C.verificaUsuario(Usuario_M);
+        
+//        if (nome.equals("")) {
+//            JOptionPane.showMessageDialog(null, "Campo Nome não pode ser vazio.", "Erro de Preenchimento", 0);
+//        }
     }//GEN-LAST:event_jB_SalvarUsuarioActionPerformed
 
     private void jT_NomeUsuarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jT_NomeUsuarioFocusLost
@@ -289,6 +355,21 @@ public class JFrame_Cadastro_Usuarios extends javax.swing.JFrame {
     private void jB_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_CancelarActionPerformed
         dispose();
     }//GEN-LAST:event_jB_CancelarActionPerformed
+
+    private void jB_SairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_SairActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jB_SairActionPerformed
+
+    private void jT_Pesquisar_UsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jT_Pesquisar_UsuarioMouseClicked
+       jT_Pesquisar_Usuario.setText("");
+        ModeloTabela.setNumRows(0);
+        Usuario_C.controlePesquisaUsuario((String) jC_Pesquisar_Por.getSelectedItem(), jT_Pesquisar_Usuario.getText(), ModeloTabela);
+    }//GEN-LAST:event_jT_Pesquisar_UsuarioMouseClicked
+
+    private void jT_Pesquisar_UsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jT_Pesquisar_UsuarioKeyPressed
+         ModeloTabela.setNumRows(0);
+        Usuario_C.controlePesquisaUsuario((String) jC_Pesquisar_Por.getSelectedItem(), jT_Pesquisar_Usuario.getText(), ModeloTabela);
+    }//GEN-LAST:event_jT_Pesquisar_UsuarioKeyPressed
 
     /**
      * @param args the command line arguments
@@ -330,9 +411,10 @@ public class JFrame_Cadastro_Usuarios extends javax.swing.JFrame {
     private javax.swing.JButton jB_LimparCampos;
     private javax.swing.JButton jB_Sair;
     private javax.swing.JButton jB_SalvarUsuario;
+    private javax.swing.JComboBox jC_Pesquisar_Por;
     private javax.swing.JComboBox jC_Setor;
-    private javax.swing.JComboBox jComboBox1;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private javax.swing.JComboBox jC_Status;
+    private com.toedter.calendar.JDateChooser jD_Data_Cadastro;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -340,14 +422,26 @@ public class JFrame_Cadastro_Usuarios extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPasswordField jP_Senha;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jT_Codigo_User;
     private javax.swing.JTextField jT_Login;
     private javax.swing.JTextField jT_NomeUsuario;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jT_Pesquisar_Usuario;
+    private javax.swing.JTable jTable_Usuario;
     // End of variables declaration//GEN-END:variables
+
+    final void popularUsuario(){
+//        Usuario_M.setCodigo_user(Integer.valueOf(jT_Codigo_User.getText()));
+        Usuario_M.setData(FormatoData.format(jD_Data_Cadastro.getDate()));
+        Usuario_M.setStatus((String)jC_Status.getSelectedItem());
+        Usuario_M.setNome(jT_NomeUsuario.getText());
+        Usuario_M.setSetor((String)jC_Setor.getSelectedItem());
+        Usuario_M.setLogin(jT_Login.getText());
+        Usuario_M.setSenha(jP_Senha.getText());
+    }
 }
