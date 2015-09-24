@@ -206,7 +206,6 @@
                     <StringItem index="0" value="Tecnologia e Informa&#xe7;&#xe3;o"/>
                   </StringArray>
                 </Property>
-                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JPasswordField" name="jP_Senha">

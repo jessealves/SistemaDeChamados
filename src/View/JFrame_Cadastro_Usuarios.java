@@ -93,7 +93,6 @@ public class JFrame_Cadastro_Usuarios extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jC_Setor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tecnologia e Informação" }));
-        jC_Setor.setEnabled(false);
 
         jD_Data_Cadastro.setEnabled(false);
 

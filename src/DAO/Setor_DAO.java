@@ -44,9 +44,9 @@ public class Setor_DAO {
     }
     
     //MÉTODO DE CONSULTA PARA PREENCHIMENTO DA TABELA DE CLIENTE.
-    public void procurarSetor(String PesquisarPor, String Pesquisa, DefaultTableModel PreencherTable) {
+    public void procurarSetor(String Pesquisa, DefaultTableModel PreencherTable) {
         try {
-            String SQLSelectUsuario = "select * from setor where " + PesquisarPor + " like '%" + Pesquisa + "%';";
+            String SQLSelectUsuario = "select * from setor where nome like '%" + Pesquisa + "%';";
 
             PreparedStatement STMT = ConexaoMySQL.getConnection().prepareStatement(SQLSelectUsuario);
             ResultSet RS = STMT.executeQuery();

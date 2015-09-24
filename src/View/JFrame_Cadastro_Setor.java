@@ -69,7 +69,6 @@ public class JFrame_Cadastro_Setor extends javax.swing.JFrame {
         jB_LimparCampos = new javax.swing.JButton();
         jB_Cancelar = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
-        jC_Pesquisar_Por = new javax.swing.JComboBox();
         jT_PesquisarSetor = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -171,8 +170,8 @@ public class JFrame_Cadastro_Setor extends javax.swing.JFrame {
         if (jTable_Usuario.getColumnModel().getColumnCount() > 0) {
             jTable_Usuario.getColumnModel().getColumn(0).setMinWidth(100);
             jTable_Usuario.getColumnModel().getColumn(0).setPreferredWidth(100);
-            jTable_Usuario.getColumnModel().getColumn(1).setMinWidth(270);
-            jTable_Usuario.getColumnModel().getColumn(1).setPreferredWidth(270);
+            jTable_Usuario.getColumnModel().getColumn(1).setMinWidth(267);
+            jTable_Usuario.getColumnModel().getColumn(1).setPreferredWidth(267);
             jTable_Usuario.getColumnModel().getColumn(2).setMinWidth(155);
             jTable_Usuario.getColumnModel().getColumn(2).setPreferredWidth(155);
             jTable_Usuario.getColumnModel().getColumn(3).setMinWidth(110);
@@ -234,9 +233,7 @@ public class JFrame_Cadastro_Setor extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jLabel8.setText("Pesquisar usuário por:");
-
-        jC_Pesquisar_Por.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Nome", "Setor", "Código" }));
+        jLabel8.setText("Pesquisar Setor:");
 
         jT_PesquisarSetor.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -264,8 +261,6 @@ public class JFrame_Cadastro_Setor extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jC_Pesquisar_Por, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jT_PesquisarSetor, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 10, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -278,7 +273,6 @@ public class JFrame_Cadastro_Setor extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jC_Pesquisar_Por, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jT_PesquisarSetor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -322,12 +316,12 @@ public class JFrame_Cadastro_Setor extends javax.swing.JFrame {
     private void jT_PesquisarSetorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jT_PesquisarSetorMouseClicked
         jT_PesquisarSetor.setText("");
         ModeloTabela.setNumRows(0);
-        Setor_C.controlePesquisaSetor((String) jC_Pesquisar_Por.getSelectedItem(), jT_PesquisarSetor.getText(), ModeloTabela);
+        Setor_C.controlePesquisaSetor(jT_PesquisarSetor.getText(), ModeloTabela);
     }//GEN-LAST:event_jT_PesquisarSetorMouseClicked
 
     private void jT_PesquisarSetorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jT_PesquisarSetorKeyPressed
    ModeloTabela.setNumRows(0);
-        Setor_C.controlePesquisaSetor((String) jC_Pesquisar_Por.getSelectedItem(), jT_PesquisarSetor.getText(), ModeloTabela);
+        Setor_C.controlePesquisaSetor(jT_PesquisarSetor.getText(), ModeloTabela);
     }//GEN-LAST:event_jT_PesquisarSetorKeyPressed
 
     /**
@@ -370,7 +364,6 @@ public class JFrame_Cadastro_Setor extends javax.swing.JFrame {
     private javax.swing.JButton jB_LimparCampos;
     private javax.swing.JButton jB_Sair;
     private javax.swing.JButton jB_SalvarUsuario;
-    private javax.swing.JComboBox jC_Pesquisar_Por;
     private javax.swing.JComboBox jC_StatusSetor;
     private com.toedter.calendar.JDateChooser jD_DataCadastro;
     private javax.swing.JLabel jLabel1;

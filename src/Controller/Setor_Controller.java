@@ -26,7 +26,7 @@ public class Setor_Controller {
         
     }
      
-      public void controlePesquisaSetor(String PesquisarPor, String Pesquisa, DefaultTableModel PreencherTable) {
+      public void controlePesquisaSetor(String Pesquisa, DefaultTableModel PreencherTable) {
 
 //        if (PesquisarPor.equals("Nome")) {
 //            PesquisarPor = "nome";
@@ -39,6 +39,6 @@ public class Setor_Controller {
 //        }
       
         PreencherTable.setNumRows(0);
-        Setor_D.procurarSetor(PesquisarPor, Pesquisa, PreencherTable);
+        Setor_D.procurarSetor(Pesquisa, PreencherTable);
     }
 }
