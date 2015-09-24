@@ -80,10 +80,9 @@ public class Usuario_DAO {
             ResultSet RS = STMT.executeQuery();
             while (RS.next()) {
                 PreencherTable.addRow(new Object[]{RS.getInt("codigo_user"),
-                    VerificadoresECorretores.converteParaJava(RS.getString("data_cadastro")),
                     RS.getString("nome"),
                     RS.getString("setor"),
-                    RS.getString("login"),
+                    VerificadoresECorretores.converteParaJava(RS.getString("data_cadastro")),
                     RS.getString("status")});
                     
             }

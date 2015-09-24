@@ -17,6 +17,7 @@ public class Usuario_Model {
     String setor;
     String login;
     String senha;
+    boolean admin;
 
     public int getCodigo_user() {
         return codigo_user;
@@ -73,5 +74,14 @@ public class Usuario_Model {
     public void setSenha(String senha) {
         this.senha = senha;
     }
+
+    public boolean getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
+    }
+    
     
 }
