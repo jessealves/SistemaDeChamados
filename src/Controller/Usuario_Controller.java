@@ -5,8 +5,10 @@
  */
 package Controller;
 
+import DAO.Setor_DAO;
 import DAO.Usuario_DAO;
 import Model.Usuario_Model;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -18,9 +20,11 @@ import javax.swing.table.DefaultTableModel;
 public class Usuario_Controller {
     
     Usuario_DAO Usuario_D;
+    Setor_DAO Setor_D;
     
     public Usuario_Controller(){
         Usuario_D = new Usuario_DAO();
+        Setor_D = new Setor_DAO();
     }
     
     public boolean verificaUsuario(Usuario_Model Usuario){
@@ -50,5 +54,10 @@ public class Usuario_Controller {
       
         PreencherTable.setNumRows(0);
         Usuario_D.procurarUsuario(PesquisarPor, Pesquisa, PreencherTable);
+    }
+    
+    //MÉTODO PARA PREENCHIMENTO DE COMBOBOX DO CLIENTE NO ATENDIMENTO
+    public void controlePesquisaSetor(String Pesquisa, List<String> ListaDeSetores) {
+        Setor_D.procurarSetor(Pesquisa, ListaDeSetores); 
     }
 }

@@ -5,10 +5,13 @@
  */
 package View;
 
+import Controller.Setor_Controller;
 import Controller.Usuario_Controller;
 import Model.Usuario_Model;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.SimpleFormatter;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -27,11 +30,17 @@ public class JFrame_Cadastro_Usuarios extends javax.swing.JFrame {
     
     Usuario_Model Usuario_M;
     Usuario_Controller Usuario_C;
+    Setor_Controller Setor_C;
+    
+    List<String> ListaDeSetores;
     
     DefaultTableModel ModeloTabela;
     
+    
     public JFrame_Cadastro_Usuarios() {
         initComponents();
+        
+        ListaDeSetores = new ArrayList<>();
         
         FormatoData = new SimpleDateFormat("dd/MM/YYYY");
         DataAtual = new Date();
@@ -39,11 +48,21 @@ public class JFrame_Cadastro_Usuarios extends javax.swing.JFrame {
         
         Usuario_M = new Usuario_Model();
         Usuario_C = new Usuario_Controller();
+        Setor_C = new Setor_Controller();
         
         ModeloTabela = (DefaultTableModel) jTable_Usuario.getModel();
         
         //AO CLICAR EM NOVO, SETA NO CAMPO DE CODIGO, QUAL SERÁ O PRÓXIMO CÓDIGO DISPONIVEL NO BANCO.
         jT_Codigo_User.setText(Usuario_C.controleDeCodigo());
+        
+        jC_Setor.removeAllItems();
+        ListaDeSetores.clear();
+        String Pesquisa = JOptionPane.showInputDialog(null, "Informe o nome do Cliente que deseja atendimento: ",
+                "Pesquisa de Clientes", 3);
+        Setor_C.controlePesquisaSetor(Pesquisa, ListaDeSetores);
+        for (String S : ListaDeSetores) {
+            jC_Setor.addItem(S);
+        }
     }
 
     /**
@@ -481,5 +500,9 @@ public class JFrame_Cadastro_Usuarios extends javax.swing.JFrame {
         Usuario_M.setLogin(jT_Login.getText());
         Usuario_M.setSenha(new String(jP_Senha.getPassword()));
         Usuario_M.setAdmin(jCh_Sim.isSelected());
+    }
+    
+    final void limparCampos(){
+        
     }
 }
