@@ -5,6 +5,12 @@
  */
 package View;
 
+import Controller.Setor_Controller;
+import Model.Setor_Model;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Cpd
@@ -14,8 +20,26 @@ public class JFrame_Cadastro_Setor extends javax.swing.JFrame {
     /**
      * Creates new form JFrame_Cadastro_Setor
      */
+    SimpleDateFormat FormatoData;
+    Date DataAtual;
+
+    Setor_Model Setor_M;
+    Setor_Controller Setor_C;
+
+    DefaultTableModel ModeloTabela;
+    
     public JFrame_Cadastro_Setor() {
         initComponents();
+
+        Setor_M = new Setor_Model();
+        Setor_C = new Setor_Controller();
+
+        FormatoData = new SimpleDateFormat("dd/MM/YYYY");
+        DataAtual = new Date();
+        jD_DataCadastro.setDate(DataAtual);
+        
+        ModeloTabela = (DefaultTableModel) jTable_Usuario.getModel();
+        
     }
 
     /**
@@ -29,14 +53,14 @@ public class JFrame_Cadastro_Setor extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jD_Data_Cadastro = new com.toedter.calendar.JDateChooser();
-        jT_NomeUsuario = new javax.swing.JTextField();
+        jD_DataCadastro = new com.toedter.calendar.JDateChooser();
+        jT_NomeSetor = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jT_Codigo_User = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jC_Status = new javax.swing.JComboBox();
+        jC_StatusSetor = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable_Usuario = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
@@ -46,7 +70,7 @@ public class JFrame_Cadastro_Setor extends javax.swing.JFrame {
         jB_Cancelar = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jC_Pesquisar_Por = new javax.swing.JComboBox();
-        jT_Pesquisar_Usuario = new javax.swing.JTextField();
+        jT_PesquisarSetor = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro, Consulta e Edição de Setores");
@@ -56,11 +80,11 @@ public class JFrame_Cadastro_Setor extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(167, 212, 145));
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jD_Data_Cadastro.setEnabled(false);
+        jD_DataCadastro.setEnabled(false);
 
-        jT_NomeUsuario.addFocusListener(new java.awt.event.FocusAdapter() {
+        jT_NomeSetor.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                jT_NomeUsuarioFocusLost(evt);
+                jT_NomeSetorFocusLost(evt);
             }
         });
 
@@ -75,8 +99,8 @@ public class JFrame_Cadastro_Setor extends javax.swing.JFrame {
 
         jLabel7.setText("Status:");
 
-        jC_Status.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ativo(a)", "Inativo(a)", "Bloqueado(a)" }));
-        jC_Status.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jC_StatusSetor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ativo(a)", "Inativo(a)", "Bloqueado(a)" }));
+        jC_StatusSetor.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -92,15 +116,15 @@ public class JFrame_Cadastro_Setor extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jD_Data_Cadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jD_DataCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jT_NomeUsuario)))
+                        .addComponent(jT_NomeSetor)))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jC_Status, 0, 185, Short.MAX_VALUE)
+                .addComponent(jC_StatusSetor, 0, 185, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -112,15 +136,15 @@ public class JFrame_Cadastro_Setor extends javax.swing.JFrame {
                         .addComponent(jLabel6)
                         .addComponent(jT_Codigo_User, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel5))
-                    .addComponent(jD_Data_Cadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jD_DataCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel7)
-                        .addComponent(jC_Status, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jC_StatusSetor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel1)
-                        .addComponent(jT_NomeUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jT_NomeSetor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -147,12 +171,12 @@ public class JFrame_Cadastro_Setor extends javax.swing.JFrame {
         if (jTable_Usuario.getColumnModel().getColumnCount() > 0) {
             jTable_Usuario.getColumnModel().getColumn(0).setMinWidth(100);
             jTable_Usuario.getColumnModel().getColumn(0).setPreferredWidth(100);
-            jTable_Usuario.getColumnModel().getColumn(1).setMinWidth(100);
-            jTable_Usuario.getColumnModel().getColumn(1).setPreferredWidth(100);
-            jTable_Usuario.getColumnModel().getColumn(2).setMinWidth(100);
-            jTable_Usuario.getColumnModel().getColumn(2).setPreferredWidth(100);
-            jTable_Usuario.getColumnModel().getColumn(3).setMinWidth(100);
-            jTable_Usuario.getColumnModel().getColumn(3).setPreferredWidth(100);
+            jTable_Usuario.getColumnModel().getColumn(1).setMinWidth(270);
+            jTable_Usuario.getColumnModel().getColumn(1).setPreferredWidth(270);
+            jTable_Usuario.getColumnModel().getColumn(2).setMinWidth(155);
+            jTable_Usuario.getColumnModel().getColumn(2).setPreferredWidth(155);
+            jTable_Usuario.getColumnModel().getColumn(3).setMinWidth(110);
+            jTable_Usuario.getColumnModel().getColumn(3).setPreferredWidth(110);
         }
 
         jPanel3.setBackground(new java.awt.Color(167, 212, 145));
@@ -214,14 +238,14 @@ public class JFrame_Cadastro_Setor extends javax.swing.JFrame {
 
         jC_Pesquisar_Por.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Nome", "Setor", "Código" }));
 
-        jT_Pesquisar_Usuario.addMouseListener(new java.awt.event.MouseAdapter() {
+        jT_PesquisarSetor.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jT_Pesquisar_UsuarioMouseClicked(evt);
+                jT_PesquisarSetorMouseClicked(evt);
             }
         });
-        jT_Pesquisar_Usuario.addKeyListener(new java.awt.event.KeyAdapter() {
+        jT_PesquisarSetor.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                jT_Pesquisar_UsuarioKeyPressed(evt);
+                jT_PesquisarSetorKeyPressed(evt);
             }
         });
 
@@ -242,7 +266,7 @@ public class JFrame_Cadastro_Setor extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jC_Pesquisar_Por, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jT_Pesquisar_Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jT_PesquisarSetor, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 10, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -255,7 +279,7 @@ public class JFrame_Cadastro_Setor extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(jC_Pesquisar_Por, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jT_Pesquisar_Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jT_PesquisarSetor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -278,40 +302,33 @@ public class JFrame_Cadastro_Setor extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jT_NomeUsuarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jT_NomeUsuarioFocusLost
+    private void jT_NomeSetorFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jT_NomeSetorFocusLost
 //        jT_Login.setText(jT_NomeUsuario.getText());
-    }//GEN-LAST:event_jT_NomeUsuarioFocusLost
+    }//GEN-LAST:event_jT_NomeSetorFocusLost
 
     private void jB_SairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_SairActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jB_SairActionPerformed
 
     private void jB_SalvarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_SalvarUsuarioActionPerformed
-        String nome = jT_NomeUsuario.getText();
-
         popularSetor();
-
-//        Usuario_C.verificaUsuario(Usuario_M);
-
-        //        if (nome.equals("")) {
-            //            JOptionPane.showMessageDialog(null, "Campo Nome não pode ser vazio.", "Erro de Preenchimento", 0);
-            //        }
+        Setor_C.verificaUsuario(Setor_M);
     }//GEN-LAST:event_jB_SalvarUsuarioActionPerformed
 
     private void jB_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_CancelarActionPerformed
         dispose();
     }//GEN-LAST:event_jB_CancelarActionPerformed
 
-    private void jT_Pesquisar_UsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jT_Pesquisar_UsuarioMouseClicked
-//        jT_Pesquisar_Usuario.setText("");
-//        ModeloTabela.setNumRows(0);
-//        Usuario_C.controlePesquisaUsuario((String) jC_Pesquisar_Por.getSelectedItem(), jT_Pesquisar_Usuario.getText(), ModeloTabela);
-    }//GEN-LAST:event_jT_Pesquisar_UsuarioMouseClicked
+    private void jT_PesquisarSetorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jT_PesquisarSetorMouseClicked
+        jT_PesquisarSetor.setText("");
+        ModeloTabela.setNumRows(0);
+        Setor_C.controlePesquisaSetor((String) jC_Pesquisar_Por.getSelectedItem(), jT_PesquisarSetor.getText(), ModeloTabela);
+    }//GEN-LAST:event_jT_PesquisarSetorMouseClicked
 
-    private void jT_Pesquisar_UsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jT_Pesquisar_UsuarioKeyPressed
-//        ModeloTabela.setNumRows(0);
-//        Usuario_C.controlePesquisaUsuario((String) jC_Pesquisar_Por.getSelectedItem(), jT_Pesquisar_Usuario.getText(), ModeloTabela);
-    }//GEN-LAST:event_jT_Pesquisar_UsuarioKeyPressed
+    private void jT_PesquisarSetorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jT_PesquisarSetorKeyPressed
+   ModeloTabela.setNumRows(0);
+        Setor_C.controlePesquisaSetor((String) jC_Pesquisar_Por.getSelectedItem(), jT_PesquisarSetor.getText(), ModeloTabela);
+    }//GEN-LAST:event_jT_PesquisarSetorKeyPressed
 
     /**
      * @param args the command line arguments
@@ -354,8 +371,8 @@ public class JFrame_Cadastro_Setor extends javax.swing.JFrame {
     private javax.swing.JButton jB_Sair;
     private javax.swing.JButton jB_SalvarUsuario;
     private javax.swing.JComboBox jC_Pesquisar_Por;
-    private javax.swing.JComboBox jC_Status;
-    private com.toedter.calendar.JDateChooser jD_Data_Cadastro;
+    private javax.swing.JComboBox jC_StatusSetor;
+    private com.toedter.calendar.JDateChooser jD_DataCadastro;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -366,12 +383,14 @@ public class JFrame_Cadastro_Setor extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jT_Codigo_User;
-    private javax.swing.JTextField jT_NomeUsuario;
-    private javax.swing.JTextField jT_Pesquisar_Usuario;
+    private javax.swing.JTextField jT_NomeSetor;
+    private javax.swing.JTextField jT_PesquisarSetor;
     private javax.swing.JTable jTable_Usuario;
     // End of variables declaration//GEN-END:variables
 
-    final void popularSetor(){
-        
+    final void popularSetor() {
+        Setor_M.setData(FormatoData.format(jD_DataCadastro.getDate()));
+        Setor_M.setNome(jT_NomeSetor.getText());
+        Setor_M.setStatus((String) jC_StatusSetor.getSelectedItem());
     }
 }

@@ -149,9 +149,7 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="jR_Sim" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="jR_Nao" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jCh_Sim" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -193,8 +191,7 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jR_Sim" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jR_Nao" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jCh_Sim" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -290,16 +287,9 @@
                 <Property name="text" type="java.lang.String" value="Admin:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JRadioButton" name="jR_Sim">
+            <Component class="javax.swing.JCheckBox" name="jCh_Sim">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Sim"/>
-                <Property name="horizontalTextPosition" type="int" value="2"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JRadioButton" name="jR_Nao">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="N&#xe3;o"/>
-                <Property name="horizontalTextPosition" type="int" value="2"/>
               </Properties>
             </Component>
           </SubComponents>

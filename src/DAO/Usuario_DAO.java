@@ -20,40 +20,46 @@ import javax.swing.table.DefaultTableModel;
  * @author Cpd
  */
 public class Usuario_DAO {
-    public Usuario_DAO(){
-        
+
+    public Usuario_DAO() {
+
     }
-    
+
     public void cadastrarUsuario(Usuario_Model Usuario) {
-        
-//        JOptionPane.showMessageDialog(null, " Nome do usuário: " + Usuario.getNome() + "\n" +
-//        " Data: " + Usuario.getData() + "\n" + " Senha: " + Usuario.getSenha() + "\n" +
-//        " Status: " + Usuario.getStatus() + "\n" + " Login: " + Usuario.getLogin() + "\n" +
-//        "Setor: " + Usuario.getSetor());
-        
+
+        boolean admin = Usuario.getAdmin();
+        String nome = String.valueOf(Usuario.getAdmin());
+
+        if (admin == true) {
+            nome = "SIM";
+        } else {
+            nome = "NÃO";
+        }
+
         try {
             String SQLInserirUsuario = "insert into usuario(codigo_user,data_cadastro,nome,"
-                    + "senha,setor,login,status) values (?,?,?,?,?,?,?);";
-            
+                    + "setor,login,senha,admin,status) values (?,?,?,?,?,?,?,?);";
+
             PreparedStatement STMT = ConexaoMySQL.getConnection().prepareStatement(SQLInserirUsuario);
-            
+
             STMT.setInt(1, Usuario.getCodigo_user());
             STMT.setString(2, VerificadoresECorretores.converteParaSQL(Usuario.getData()));
             STMT.setString(3, Usuario.getNome());
-            STMT.setString(4, Usuario.getSenha());
-            STMT.setString(5, Usuario.getSetor());
-            STMT.setString(6, Usuario.getLogin());
-            STMT.setString(7, Usuario.getStatus());
-            
+            STMT.setString(4, Usuario.getSetor());
+            STMT.setString(5, Usuario.getLogin());
+            STMT.setString(6, Usuario.getSenha());
+            STMT.setString(7, nome);
+            STMT.setString(8, Usuario.getStatus());
+
             STMT.execute();
             ConexaoMySQL.getConnection();
-            JOptionPane.showMessageDialog(null, "Usuário: "+ Usuario.getNome() + " Cadastrado com sucesso.","Sucesso",1);
+            JOptionPane.showMessageDialog(null, "Usuário: " + Usuario.getNome() + " Cadastrado com sucesso.", "Sucesso", 1);
         } catch (SQLException ex) {
             Logger.getLogger(Usuario_DAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
-    
+
     //MOSTRANDO PROXIMO ID DO BANCO PARA CADASTRO DE PESSOA
     public String proximoUsuario() {
         try {
@@ -70,12 +76,12 @@ public class Usuario_DAO {
             return "0";
         }
     }
-    
+
     //MÉTODO DE CONSULTA PARA PREENCHIMENTO DA TABELA DE CLIENTE.
     public void procurarUsuario(String PesquisarPor, String Pesquisa, DefaultTableModel PreencherTable) {
         try {
             String SQLSelectUsuario = "select * from usuario where " + PesquisarPor + " like '%" + Pesquisa + "%';";
-            
+
             PreparedStatement STMT = ConexaoMySQL.getConnection().prepareStatement(SQLSelectUsuario);
             ResultSet RS = STMT.executeQuery();
             while (RS.next()) {
@@ -83,8 +89,9 @@ public class Usuario_DAO {
                     RS.getString("nome"),
                     RS.getString("setor"),
                     VerificadoresECorretores.converteParaJava(RS.getString("data_cadastro")),
+                    RS.getString("admin"),
                     RS.getString("status")});
-                    
+
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Não Foi Possível Pesquisar.", "ERRO DE SQL", 0);

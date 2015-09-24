@@ -57,7 +57,7 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jC_Pesquisar_Por" min="-2" pref="100" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jT_Pesquisar_Usuario" min="-2" pref="221" max="-2" attributes="0"/>
+                                  <Component id="jT_PesquisarSetor" min="-2" pref="221" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace min="0" pref="10" max="32767" attributes="0"/>
@@ -76,7 +76,7 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jC_Pesquisar_Por" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jT_Pesquisar_Usuario" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jT_PesquisarSetor" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" pref="127" max="-2" attributes="0"/>
@@ -113,18 +113,18 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jD_Data_Cadastro" min="-2" pref="130" max="-2" attributes="0"/>
+                              <Component id="jD_DataCadastro" min="-2" pref="130" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jT_NomeUsuario" max="32767" attributes="0"/>
+                              <Component id="jT_NomeSetor" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jC_Status" pref="185" max="32767" attributes="0"/>
+                      <Component id="jC_StatusSetor" pref="185" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -139,17 +139,17 @@
                               <Component id="jT_Codigo_User" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jD_Data_Cadastro" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jD_DataCadastro" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                               <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jC_Status" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jC_StatusSetor" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jT_NomeUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jT_NomeSetor" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -158,14 +158,14 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="com.toedter.calendar.JDateChooser" name="jD_Data_Cadastro">
+            <Component class="com.toedter.calendar.JDateChooser" name="jD_DataCadastro">
               <Properties>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jT_NomeUsuario">
+            <Component class="javax.swing.JTextField" name="jT_NomeSetor">
               <Events>
-                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jT_NomeUsuarioFocusLost"/>
+                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jT_NomeSetorFocusLost"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel1">
@@ -194,7 +194,7 @@
                 <Property name="text" type="java.lang.String" value="Status:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="jC_Status">
+            <Component class="javax.swing.JComboBox" name="jC_StatusSetor">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="3">
@@ -238,17 +238,17 @@
                       <Editor/>
                       <Renderer/>
                     </Column>
-                    <Column maxWidth="-1" minWidth="100" prefWidth="100" resizable="true">
+                    <Column maxWidth="-1" minWidth="270" prefWidth="270" resizable="true">
                       <Title/>
                       <Editor/>
                       <Renderer/>
                     </Column>
-                    <Column maxWidth="-1" minWidth="100" prefWidth="100" resizable="true">
+                    <Column maxWidth="-1" minWidth="155" prefWidth="155" resizable="true">
                       <Title/>
                       <Editor/>
                       <Renderer/>
                     </Column>
-                    <Column maxWidth="-1" minWidth="100" prefWidth="100" resizable="true">
+                    <Column maxWidth="-1" minWidth="110" prefWidth="110" resizable="true">
                       <Title/>
                       <Editor/>
                       <Renderer/>
@@ -351,10 +351,10 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jT_Pesquisar_Usuario">
+        <Component class="javax.swing.JTextField" name="jT_PesquisarSetor">
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jT_Pesquisar_UsuarioMouseClicked"/>
-            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jT_Pesquisar_UsuarioKeyPressed"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jT_PesquisarSetorMouseClicked"/>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jT_PesquisarSetorKeyPressed"/>
           </Events>
         </Component>
       </SubComponents>

@@ -72,8 +72,7 @@ public class JFrame_Cadastro_Usuarios extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jC_Status = new javax.swing.JComboBox();
         jLabel9 = new javax.swing.JLabel();
-        jR_Sim = new javax.swing.JRadioButton();
-        jR_Nao = new javax.swing.JRadioButton();
+        jCh_Sim = new javax.swing.JCheckBox();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable_Usuario = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
@@ -129,11 +128,7 @@ public class JFrame_Cadastro_Usuarios extends javax.swing.JFrame {
 
         jLabel9.setText("Admin:");
 
-        jR_Sim.setText("Sim");
-        jR_Sim.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-
-        jR_Nao.setText("Não");
-        jR_Nao.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jCh_Sim.setText("Sim");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -177,9 +172,7 @@ public class JFrame_Cadastro_Usuarios extends javax.swing.JFrame {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel9)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jR_Sim)
-                                .addGap(18, 18, 18)
-                                .addComponent(jR_Nao)))))
+                                .addComponent(jCh_Sim)))))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -210,8 +203,7 @@ public class JFrame_Cadastro_Usuarios extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(jR_Sim)
-                    .addComponent(jR_Nao))
+                    .addComponent(jCh_Sim))
                 .addContainerGap())
         );
 
@@ -375,8 +367,15 @@ public class JFrame_Cadastro_Usuarios extends javax.swing.JFrame {
 
     private void jB_SalvarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_SalvarUsuarioActionPerformed
         String nome = jT_NomeUsuario.getText();
+        
+        boolean sim = jCh_Sim.isSelected();
+//        boolean nao = jR_Nao.isSelected();
+//        
+//        JOptionPane.showMessageDialog(null, sim);
 
         popularUsuario();
+        
+        
         
         Usuario_C.verificaUsuario(Usuario_M);
         
@@ -451,6 +450,7 @@ public class JFrame_Cadastro_Usuarios extends javax.swing.JFrame {
     private javax.swing.JComboBox jC_Pesquisar_Por;
     private javax.swing.JComboBox jC_Setor;
     private javax.swing.JComboBox jC_Status;
+    private javax.swing.JCheckBox jCh_Sim;
     private com.toedter.calendar.JDateChooser jD_Data_Cadastro;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -465,8 +465,6 @@ public class JFrame_Cadastro_Usuarios extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JRadioButton jR_Nao;
-    private javax.swing.JRadioButton jR_Sim;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jT_Codigo_User;
     private javax.swing.JTextField jT_Login;
@@ -483,7 +481,6 @@ public class JFrame_Cadastro_Usuarios extends javax.swing.JFrame {
         Usuario_M.setSetor((String)jC_Setor.getSelectedItem());
         Usuario_M.setLogin(jT_Login.getText());
         Usuario_M.setSenha(new String(jP_Senha.getPassword()));
-        Usuario_M.setAdmin(jR_Nao.isSelected());
-        Usuario_M.setAdmin(jR_Sim.isSelected());
+        Usuario_M.setAdmin(jCh_Sim.isSelected());
     }
 }
