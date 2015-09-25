@@ -62,6 +62,9 @@ public class JFrame_Cadastro_Usuarios extends javax.swing.JFrame {
         for (String S : ListaDeClientes) {
             jC_Setor.addItem(S);
         }
+        
+        habilitaCampos(false);
+        habilitaBotoes(false);
        
     }
 
@@ -97,8 +100,10 @@ public class JFrame_Cadastro_Usuarios extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jB_Sair = new javax.swing.JButton();
         jB_SalvarUsuario = new javax.swing.JButton();
-        jB_LimparCampos = new javax.swing.JButton();
+        jB_Editar = new javax.swing.JButton();
         jB_Cancelar = new javax.swing.JButton();
+        jB_LimparCampos = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jC_Pesquisar_Por = new javax.swing.JComboBox();
         jT_Pesquisar_Usuario = new javax.swing.JTextField();
@@ -279,7 +284,12 @@ public class JFrame_Cadastro_Usuarios extends javax.swing.JFrame {
             }
         });
 
-        jB_LimparCampos.setText("Editar");
+        jB_Editar.setText("Editar");
+        jB_Editar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_EditarActionPerformed(evt);
+            }
+        });
 
         jB_Cancelar.setText("Cancelar");
         jB_Cancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -288,13 +298,31 @@ public class JFrame_Cadastro_Usuarios extends javax.swing.JFrame {
             }
         });
 
+        jB_LimparCampos.setText("Limpar");
+        jB_LimparCampos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_LimparCamposActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Novo");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(151, 151, 151)
+                .addGap(71, 71, 71)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jB_SalvarUsuario)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jB_Editar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jB_LimparCampos)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -304,7 +332,7 @@ public class JFrame_Cadastro_Usuarios extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jB_Cancelar, jB_LimparCampos, jB_Sair, jB_SalvarUsuario});
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jB_Cancelar, jB_Editar, jB_LimparCampos, jB_Sair, jB_SalvarUsuario, jButton1});
 
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -312,9 +340,11 @@ public class JFrame_Cadastro_Usuarios extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jB_SalvarUsuario)
-                    .addComponent(jB_LimparCampos)
+                    .addComponent(jB_Editar)
                     .addComponent(jB_Cancelar)
-                    .addComponent(jB_Sair))
+                    .addComponent(jB_Sair)
+                    .addComponent(jB_LimparCampos)
+                    .addComponent(jButton1))
                 .addContainerGap())
         );
 
@@ -447,7 +477,7 @@ public class JFrame_Cadastro_Usuarios extends javax.swing.JFrame {
 //            jButton_PESSOA_LIMPAR.setEnabled(true);
 //            jButton_PESSOA_SALVAR.setEnabled(false);
 //            jButton_PESSOA_NOVO_CADASTRO.setEnabled(false);
-
+            
             Usuario_M = Usuario_C.controlePreenchiementoPessoa(Integer.parseInt(Modelo.getValueAt(jTable_Usuario.getSelectedRow(), 0).toString()));
 
             jT_Codigo_User.setText(Usuario_M.getCodigo_user() + "");
@@ -462,7 +492,7 @@ public class JFrame_Cadastro_Usuarios extends javax.swing.JFrame {
             jC_Setor.setSelectedItem(Usuario_M.getSetor());
             jT_Login.setText(Usuario_M.getLogin());
             jP_Senha.setText(Usuario_M.getSenha());
-            jCh_Sim.setText(String.valueOf(Usuario_M.getAdmin()));
+            jCh_Sim.setSelected(Usuario_M.getAdmin());
             jC_Status.setSelectedItem(Usuario_M.getStatus());
             
 
@@ -471,6 +501,24 @@ public class JFrame_Cadastro_Usuarios extends javax.swing.JFrame {
             Logger.getLogger(JFrame_Cadastro_Usuarios.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jTable_UsuarioMousePressed
+
+    private void jB_EditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_EditarActionPerformed
+        popularUsuario();
+        Usuario_C.verificarDadosEditados(Usuario_M);
+//        if (Usuario_C.verificarDadosEditados(Usuario_M)) {
+//            limparTudo();
+//            habilitaCampos(false);
+//        }
+    }//GEN-LAST:event_jB_EditarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        habilitaCampos(true);
+        habilitaBotoes(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jB_LimparCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_LimparCamposActionPerformed
+        limparCampos();
+    }//GEN-LAST:event_jB_LimparCamposActionPerformed
 
     /**
      * @param args the command line arguments
@@ -509,9 +557,11 @@ public class JFrame_Cadastro_Usuarios extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jB_Cancelar;
+    private javax.swing.JButton jB_Editar;
     private javax.swing.JButton jB_LimparCampos;
     private javax.swing.JButton jB_Sair;
     private javax.swing.JButton jB_SalvarUsuario;
+    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox jC_Pesquisar_Por;
     private javax.swing.JComboBox jC_Setor;
     private javax.swing.JComboBox jC_Status;
@@ -550,6 +600,24 @@ public class JFrame_Cadastro_Usuarios extends javax.swing.JFrame {
     }
     
     final void limparCampos(){
-        
+        jT_NomeUsuario.setText("");
+        jT_Login.setText("");
+        jT_Codigo_User.setText("");
+        jT_Pesquisar_Usuario.setText("");
+        jC_Status.setSelectedItem("Ativo(a)");
+        jC_Setor.setSelectedItem(" ");
+        jP_Senha.setText("");
+        jCh_Sim.setSelected(false);
+    }
+    final void habilitaCampos(boolean valor){
+        jT_NomeUsuario.setEnabled(valor);
+        jP_Senha.setEnabled(valor);
+        jC_Status.setEnabled(valor);
+        jC_Setor.setEnabled(valor);
+    }
+    final void habilitaBotoes(boolean valor){
+        jB_SalvarUsuario.setEnabled(valor);
+        jB_LimparCampos.setEnabled(valor);
+        jB_Editar.setEnabled(valor);
     }
 }

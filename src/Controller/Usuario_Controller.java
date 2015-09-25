@@ -9,6 +9,7 @@ import DAO.Setor_DAO;
 import DAO.Usuario_DAO;
 import Model.Usuario_Model;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -64,5 +65,31 @@ public class Usuario_Controller {
     
     public Usuario_Model controlePreenchiementoPessoa(int Codigo) {
         return Usuario_D.preencherCamposPESSOA(Codigo);
+    }
+    
+     public boolean verificarDadosEditados(Usuario_Model Usuario){
+        
+        if(Usuario.getNome().equals("")){
+            JOptionPane.showMessageDialog(null, "Nome está vazio");
+            return false;
+        }
+//        if(Cliente.getTelefone_cliente().equals("(  )    -    ")){
+//            JOptionPane.showMessageDialog(null, "Telefone está vazio");
+//            return false;
+//        }
+//        if(Cliente.getEmail_cliente().equals("")){
+//            JOptionPane.showMessageDialog(null, "Email está vazio");
+//            return false;
+//        }
+//        if(Cliente.getSenha().equals("")){
+//            JOptionPane.showMessageDialog(null, "Senha está vazio");
+//            return false;
+//        }
+        
+        
+        //JOptionPane.showMessageDialog(null, "AAAAA CLIENTE");
+        
+        Usuario_D.editarUsuario(Usuario);
+        return true;
     }
 }

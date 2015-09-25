@@ -135,12 +135,56 @@ public class Usuario_DAO {
                 UsuarioModel.setSetor(RS.getString("setor"));
                 UsuarioModel.setLogin(RS.getString("login"));
                 UsuarioModel.setSenha(RS.getString("senha"));
-                UsuarioModel.setAdmin(Boolean.parseBoolean(RS.getString("admin")));
+                if("SIM".equals(RS.getString("admin"))){
+                    //JOptionPane.showMessageDialog(null, "SIM SIM");
+                    UsuarioModel.setAdmin(Boolean.parseBoolean("true"));
+                }else{
+                    //JOptionPane.showMessageDialog(null, "NÃO NÃO");
+                    UsuarioModel.setAdmin(Boolean.parseBoolean("false"));
+                }
+                
                 UsuarioModel.setStatus(RS.getString("status"));
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Não Foi Possível Preencher Campos.", "ERRO DE SQL", 0);
         }
         return UsuarioModel;
+    }
+    
+    //MÉTODO PARA EDITAR CLIENTE.
+    public void editarUsuario(Usuario_Model Usuario) {
+        
+        boolean admin = Usuario.getAdmin();
+        String nome = String.valueOf(Usuario.getAdmin());
+
+        if (admin == true) {
+            nome = "SIM";
+        } else {
+            nome = "NÃO";
+        }
+        
+        try {
+            String SQLEdition = "update usuario set data_cadastro = ?, nome = ?,setor = ?,"
+                    + "login = ?,senha = ?,admin = ?,"
+                    + "status = ? where codigo_user = ?;";
+
+            PreparedStatement STMT = ConexaoMySQL.getConnection().prepareStatement(SQLEdition);
+
+            STMT.setString(1, VerificadoresECorretores.converteParaSQL(Usuario.getData()));
+            STMT.setString(2, Usuario.getNome());
+            STMT.setString(3, Usuario.getSetor());
+            STMT.setString(4, Usuario.getLogin());
+            STMT.setString(5, Usuario.getSenha());
+            STMT.setString(6, nome);
+            STMT.setString(7, Usuario.getStatus());
+            STMT.setInt(8, Usuario.getCodigo_user());
+            
+            STMT.execute();
+            ConexaoMySQL.getConnection();
+            JOptionPane.showMessageDialog(null, "Cliente editado com sucesso!", "SUCESSO", 1);
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao editar Cliente h" + ex);
+        }
     }
 }
