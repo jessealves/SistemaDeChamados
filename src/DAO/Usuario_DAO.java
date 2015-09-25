@@ -21,9 +21,9 @@ import javax.swing.table.DefaultTableModel;
  * @author Cpd
  */
 public class Usuario_DAO {
-
+        Usuario_Model Usuario_M;
     public Usuario_DAO() {
-
+        Usuario_M = new Usuario_Model();
     }
 
     public void cadastrarUsuario(Usuario_Model Usuario) {
@@ -186,5 +186,28 @@ public class Usuario_DAO {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao editar Cliente h" + ex);
         }
+    }
+    
+    public void procurarCliente(String Pesquisa) {
+        try {
+            String SQLSelection = "select *from usuario where codigo_user like '%" + Pesquisa + "%';";
+            PreparedStatement STMT = ConexaoMySQL.getConnection().prepareStatement(SQLSelection);
+            ResultSet RS = STMT.executeQuery();
+            
+            if(RS.next()){
+                Usuario_M.setNome(RS.getString("nome"));
+            }
+            
+//            while (RS.next()) {
+//                Modelo.addRow(new Object[]{RS.getString("id_cliente"), RS.getString("nome_cliente"),
+//                    RS.getString("telefone_cliente"), RS.getString("sexo_cliente"), VerificadoresECorretores.converteParaJava(RS.getString("data_cadastro")),
+//                    VerificadoresECorretores.converteParaJava(RS.getString("data_nascimento")), RS.getString("email_cliente"), RS.getString("logradouro"),
+//                    RS.getString("numero"), RS.getString("bairro"), RS.getString("cep"), RS.getString("cidade"),
+//                    RS.getString("estado"),RS.getString("estatus")});
+//            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Impossivel pesquisar", "ERRO DE SQL", 0);
+        }
+
     }
 }

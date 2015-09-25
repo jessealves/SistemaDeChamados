@@ -15,6 +15,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -29,43 +30,36 @@ public class JFrame_Cadastro_Usuarios extends javax.swing.JFrame {
      */
     SimpleDateFormat FormatoData;
     Date DataAtual;
-    
+
     Usuario_Model Usuario_M;
     Usuario_Controller Usuario_C;
     Setor_Controller Setor_C;
-    
+
     List<String> ListaDeClientes;
 
     DefaultTableModel Modelo;
-    
+
     public JFrame_Cadastro_Usuarios() {
         initComponents();
-                
+
         FormatoData = new SimpleDateFormat("dd/MM/YYYY");
         DataAtual = new Date();
         jD_Data_Cadastro.setDate(DataAtual);
-        
+
         Usuario_M = new Usuario_Model();
         Usuario_C = new Usuario_Controller();
         Setor_C = new Setor_Controller();
-                
+
         //AO CLICAR EM NOVO, SETA NO CAMPO DE CODIGO, QUAL SERÁ O PRÓXIMO CÓDIGO DISPONIVEL NO BANCO.
         jT_Codigo_User.setText(Usuario_C.controleDeCodigo());
-        
+
         ListaDeClientes = new ArrayList<>();
 
         Modelo = (DefaultTableModel) jTable_Usuario.getModel();
-        
-        jC_Setor.removeAllItems();
-        ListaDeClientes.clear();
-        Usuario_C.controlePesquisaClienteAtendimento(ListaDeClientes);
-        for (String S : ListaDeClientes) {
-            jC_Setor.addItem(S);
-        }
-        
+
         habilitaCampos(false);
         habilitaBotoes(false);
-       
+
     }
 
     /**
@@ -423,26 +417,14 @@ public class JFrame_Cadastro_Usuarios extends javax.swing.JFrame {
 
     private void jB_SalvarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_SalvarUsuarioActionPerformed
         String nome = jT_NomeUsuario.getText();
-        
         boolean sim = jCh_Sim.isSelected();
-//        boolean nao = jR_Nao.isSelected();
-//        
-//        JOptionPane.showMessageDialog(null, sim);
-
         popularUsuario();
-        
-        
-        
         Usuario_C.verificaUsuario(Usuario_M);
-        
-//        if (nome.equals("")) {
-//            JOptionPane.showMessageDialog(null, "Campo Nome não pode ser vazio.", "Erro de Preenchimento", 0);
-//        }
     }//GEN-LAST:event_jB_SalvarUsuarioActionPerformed
 
     private void jT_NomeUsuarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jT_NomeUsuarioFocusLost
         jT_Login.setText(jT_NomeUsuario.getText());
-        
+
     }//GEN-LAST:event_jT_NomeUsuarioFocusLost
 
     private void jB_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_CancelarActionPerformed
@@ -454,35 +436,36 @@ public class JFrame_Cadastro_Usuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_jB_SairActionPerformed
 
     private void jT_Pesquisar_UsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jT_Pesquisar_UsuarioMouseClicked
-       jT_Pesquisar_Usuario.setText("");
+        jT_Pesquisar_Usuario.setText("");
         Modelo.setNumRows(0);
         Usuario_C.controlePesquisaUsuario((String) jC_Pesquisar_Por.getSelectedItem(), jT_Pesquisar_Usuario.getText(), Modelo);
     }//GEN-LAST:event_jT_Pesquisar_UsuarioMouseClicked
 
     private void jT_Pesquisar_UsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jT_Pesquisar_UsuarioKeyPressed
-         Modelo.setNumRows(0);
+        Modelo.setNumRows(0);
         Usuario_C.controlePesquisaUsuario((String) jC_Pesquisar_Por.getSelectedItem(), jT_Pesquisar_Usuario.getText(), Modelo);
     }//GEN-LAST:event_jT_Pesquisar_UsuarioKeyPressed
 
     private void jC_Pesquisar_PorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jC_Pesquisar_PorActionPerformed
-       
+
     }//GEN-LAST:event_jC_Pesquisar_PorActionPerformed
 
     private void jTable_UsuarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_UsuarioMousePressed
+
+        habilitaCampos(true);
+        jC_Setor.removeAllItems();
+        ListaDeClientes.clear();
+        Usuario_C.controlePesquisaClienteAtendimento(ListaDeClientes);
+        for (String S : ListaDeClientes) {
+            jC_Setor.addItem(S);
+        }
+
         try {
 
-//            editarPessoa(true);
-
-//            jButton_PESSOA_EDITAR.setEnabled(false);
-//            jButton_PESSOA_LIMPAR.setEnabled(true);
-//            jButton_PESSOA_SALVAR.setEnabled(false);
-//            jButton_PESSOA_NOVO_CADASTRO.setEnabled(false);
-            
             Usuario_M = Usuario_C.controlePreenchiementoPessoa(Integer.parseInt(Modelo.getValueAt(jTable_Usuario.getSelectedRow(), 0).toString()));
 
             jT_Codigo_User.setText(Usuario_M.getCodigo_user() + "");
 
-            
             String dataCadastro = Usuario_M.getData();
             SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
             Date c = formatter.parse(dataCadastro);
@@ -494,12 +477,12 @@ public class JFrame_Cadastro_Usuarios extends javax.swing.JFrame {
             jP_Senha.setText(Usuario_M.getSenha());
             jCh_Sim.setSelected(Usuario_M.getAdmin());
             jC_Status.setSelectedItem(Usuario_M.getStatus());
-            
 
         } catch (ParseException ex) {
             JOptionPane.showMessageDialog(null, "O ERRO ", "Preenchimento Obrigatório", 0);
             Logger.getLogger(JFrame_Cadastro_Usuarios.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }//GEN-LAST:event_jTable_UsuarioMousePressed
 
     private void jB_EditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_EditarActionPerformed
@@ -514,6 +497,15 @@ public class JFrame_Cadastro_Usuarios extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         habilitaCampos(true);
         habilitaBotoes(true);
+        limparCampos();
+
+//        final JComboBox<String> jC_Setor= new JComboBox<String>();
+        jC_Setor.removeAllItems();
+        ListaDeClientes.clear();
+        Usuario_C.controlePesquisaClienteAtendimento(ListaDeClientes);
+        for (String S : ListaDeClientes) {
+            jC_Setor.addItem(S);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jB_LimparCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_LimparCamposActionPerformed
@@ -588,18 +580,18 @@ public class JFrame_Cadastro_Usuarios extends javax.swing.JFrame {
     private javax.swing.JTable jTable_Usuario;
     // End of variables declaration//GEN-END:variables
 
-    final void popularUsuario(){
+    final void popularUsuario() {
 //        Usuario_M.setCodigo_user(Integer.valueOf(jT_Codigo_User.getText()));
         Usuario_M.setData(FormatoData.format(jD_Data_Cadastro.getDate()));
-        Usuario_M.setStatus((String)jC_Status.getSelectedItem());
+        Usuario_M.setStatus((String) jC_Status.getSelectedItem());
         Usuario_M.setNome(jT_NomeUsuario.getText());
-        Usuario_M.setSetor((String)jC_Setor.getSelectedItem());
+        Usuario_M.setSetor((String) jC_Setor.getSelectedItem());
         Usuario_M.setLogin(jT_Login.getText());
         Usuario_M.setSenha(new String(jP_Senha.getPassword()));
         Usuario_M.setAdmin(jCh_Sim.isSelected());
     }
-    
-    final void limparCampos(){
+
+    final void limparCampos() {
         jT_NomeUsuario.setText("");
         jT_Login.setText("");
         jT_Codigo_User.setText("");
@@ -609,13 +601,16 @@ public class JFrame_Cadastro_Usuarios extends javax.swing.JFrame {
         jP_Senha.setText("");
         jCh_Sim.setSelected(false);
     }
-    final void habilitaCampos(boolean valor){
+
+    final void habilitaCampos(boolean valor) {
         jT_NomeUsuario.setEnabled(valor);
         jP_Senha.setEnabled(valor);
         jC_Status.setEnabled(valor);
         jC_Setor.setEnabled(valor);
+        jCh_Sim.setEnabled(valor);
     }
-    final void habilitaBotoes(boolean valor){
+
+    final void habilitaBotoes(boolean valor) {
         jB_SalvarUsuario.setEnabled(valor);
         jB_LimparCampos.setEnabled(valor);
         jB_Editar.setEnabled(valor);

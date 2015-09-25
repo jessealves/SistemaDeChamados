@@ -92,4 +92,8 @@ public class Usuario_Controller {
         Usuario_D.editarUsuario(Usuario);
         return true;
     }
+     
+     public void controlePesquisa(String Pesquisa){
+        Usuario_D.procurarCliente(Pesquisa);
+    }
 }
