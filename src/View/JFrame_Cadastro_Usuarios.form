@@ -202,9 +202,7 @@
             <Component class="javax.swing.JComboBox" name="jC_Setor">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="1">
-                    <StringItem index="0" value="Tecnologia e Informa&#xe7;&#xe3;o"/>
-                  </StringArray>
+                  <StringArray count="0"/>
                 </Property>
               </Properties>
             </Component>
@@ -357,6 +355,9 @@
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTable_UsuarioMousePressed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -445,6 +446,9 @@
               </StringArray>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jC_Pesquisar_PorActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="jT_Pesquisar_Usuario">
           <Events>

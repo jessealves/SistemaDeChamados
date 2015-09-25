@@ -10,6 +10,7 @@ import Utilitarios.VerificadoresECorretores;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -97,5 +98,49 @@ public class Usuario_DAO {
             JOptionPane.showMessageDialog(null, "Não Foi Possível Pesquisar.", "ERRO DE SQL", 0);
         }
 
+    }
+    
+    //MÉTODO DE CONSULTA PARA PREENCHIMENTO DO CAMPO FUNCIONARIO NO ATENDIMENTO.
+    public void procurarClienteAtendimento(List<String> ListaDeCliente) {
+        try {
+             //where nome like '%" + Pesquisa + "%'
+            String SQLSelectFuncionario = "select * from setor;";
+            
+            PreparedStatement STMT = ConexaoMySQL.getConnection().prepareStatement(SQLSelectFuncionario);
+            ResultSet RS = STMT.executeQuery();
+            while (RS.next()) {
+                ListaDeCliente.add(RS.getString("codigo_setor") + " - " + RS.getString("nome"));
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Não Foi Possível Pesquisar.", "ERRO DE SQL", 0);
+        }
+
+    }
+    
+    //preenchimento de campos ao clicar na tabela de usuarios.
+    public Usuario_Model preencherCamposPESSOA(int Codigo) {
+
+        //Instância da classe Pessoa_Modelo
+        Usuario_Model UsuarioModel = new Usuario_Model();
+
+        try {
+            String SQLSelectPessoa = "select * from usuario where codigo_user = ?;";
+            PreparedStatement STMT = ConexaoMySQL.getConnection().prepareStatement(SQLSelectPessoa);
+            STMT.setInt(1, Codigo);
+            ResultSet RS = STMT.executeQuery();
+            if (RS.next()) {
+                UsuarioModel.setCodigo_user(RS.getInt("codigo_user"));
+                UsuarioModel.setData(VerificadoresECorretores.converteParaJava(RS.getString("data_cadastro")));
+                UsuarioModel.setNome(RS.getString("nome"));
+                UsuarioModel.setSetor(RS.getString("setor"));
+                UsuarioModel.setLogin(RS.getString("login"));
+                UsuarioModel.setSenha(RS.getString("senha"));
+                UsuarioModel.setAdmin(Boolean.parseBoolean(RS.getString("admin")));
+                UsuarioModel.setStatus(RS.getString("status"));
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Não Foi Possível Preencher Campos.", "ERRO DE SQL", 0);
+        }
+        return UsuarioModel;
     }
 }

@@ -21,10 +21,12 @@ public class Usuario_Controller {
     
     Usuario_DAO Usuario_D;
     Setor_DAO Setor_D;
+    Usuario_Model Usuario_M;
     
     public Usuario_Controller(){
         Usuario_D = new Usuario_DAO();
         Setor_D = new Setor_DAO();
+        Usuario_M = new Usuario_Model();
     }
     
     public boolean verificaUsuario(Usuario_Model Usuario){
@@ -55,9 +57,12 @@ public class Usuario_Controller {
         PreencherTable.setNumRows(0);
         Usuario_D.procurarUsuario(PesquisarPor, Pesquisa, PreencherTable);
     }
-    
     //MÉTODO PARA PREENCHIMENTO DE COMBOBOX DO CLIENTE NO ATENDIMENTO
-    public void controlePesquisaSetor(String Pesquisa, List<String> ListaDeSetores) {
-        Setor_D.procurarSetor(Pesquisa, ListaDeSetores); 
+    public void controlePesquisaClienteAtendimento(List<String> ListaDeCliente) {
+        Usuario_D.procurarClienteAtendimento(ListaDeCliente);
+    }
+    
+    public Usuario_Model controlePreenchiementoPessoa(int Codigo) {
+        return Usuario_D.preencherCamposPESSOA(Codigo);
     }
 }

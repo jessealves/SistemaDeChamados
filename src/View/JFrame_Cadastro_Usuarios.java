@@ -8,11 +8,13 @@ package View;
 import Controller.Setor_Controller;
 import Controller.Usuario_Controller;
 import Model.Usuario_Model;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.SimpleFormatter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -32,16 +34,13 @@ public class JFrame_Cadastro_Usuarios extends javax.swing.JFrame {
     Usuario_Controller Usuario_C;
     Setor_Controller Setor_C;
     
-    List<String> ListaDeSetores;
-    
-    DefaultTableModel ModeloTabela;
-    
+    List<String> ListaDeClientes;
+
+    DefaultTableModel Modelo;
     
     public JFrame_Cadastro_Usuarios() {
         initComponents();
-        
-        ListaDeSetores = new ArrayList<>();
-        
+                
         FormatoData = new SimpleDateFormat("dd/MM/YYYY");
         DataAtual = new Date();
         jD_Data_Cadastro.setDate(DataAtual);
@@ -49,20 +48,21 @@ public class JFrame_Cadastro_Usuarios extends javax.swing.JFrame {
         Usuario_M = new Usuario_Model();
         Usuario_C = new Usuario_Controller();
         Setor_C = new Setor_Controller();
-        
-        ModeloTabela = (DefaultTableModel) jTable_Usuario.getModel();
-        
+                
         //AO CLICAR EM NOVO, SETA NO CAMPO DE CODIGO, QUAL SERÁ O PRÓXIMO CÓDIGO DISPONIVEL NO BANCO.
         jT_Codigo_User.setText(Usuario_C.controleDeCodigo());
         
+        ListaDeClientes = new ArrayList<>();
+
+        Modelo = (DefaultTableModel) jTable_Usuario.getModel();
+        
         jC_Setor.removeAllItems();
-        ListaDeSetores.clear();
-        String Pesquisa = JOptionPane.showInputDialog(null, "Informe o nome do Cliente que deseja atendimento: ",
-                "Pesquisa de Clientes", 3);
-        Setor_C.controlePesquisaSetor(Pesquisa, ListaDeSetores);
-        for (String S : ListaDeSetores) {
+        ListaDeClientes.clear();
+        Usuario_C.controlePesquisaClienteAtendimento(ListaDeClientes);
+        for (String S : ListaDeClientes) {
             jC_Setor.addItem(S);
         }
+       
     }
 
     /**
@@ -110,8 +110,6 @@ public class JFrame_Cadastro_Usuarios extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(167, 212, 145));
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        jC_Setor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tecnologia e Informação" }));
 
         jD_Data_Cadastro.setEnabled(false);
 
@@ -244,6 +242,11 @@ public class JFrame_Cadastro_Usuarios extends javax.swing.JFrame {
         });
         jTable_Usuario.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         jTable_Usuario.setGridColor(new java.awt.Color(167, 212, 145));
+        jTable_Usuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTable_UsuarioMousePressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable_Usuario);
         if (jTable_Usuario.getColumnModel().getColumnCount() > 0) {
             jTable_Usuario.getColumnModel().getColumn(0).setMinWidth(55);
@@ -318,6 +321,11 @@ public class JFrame_Cadastro_Usuarios extends javax.swing.JFrame {
         jLabel8.setText("Pesquisar usuário por:");
 
         jC_Pesquisar_Por.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Nome", "Setor", "Código" }));
+        jC_Pesquisar_Por.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jC_Pesquisar_PorActionPerformed(evt);
+            }
+        });
 
         jT_Pesquisar_Usuario.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -404,6 +412,7 @@ public class JFrame_Cadastro_Usuarios extends javax.swing.JFrame {
 
     private void jT_NomeUsuarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jT_NomeUsuarioFocusLost
         jT_Login.setText(jT_NomeUsuario.getText());
+        
     }//GEN-LAST:event_jT_NomeUsuarioFocusLost
 
     private void jB_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_CancelarActionPerformed
@@ -416,14 +425,52 @@ public class JFrame_Cadastro_Usuarios extends javax.swing.JFrame {
 
     private void jT_Pesquisar_UsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jT_Pesquisar_UsuarioMouseClicked
        jT_Pesquisar_Usuario.setText("");
-        ModeloTabela.setNumRows(0);
-        Usuario_C.controlePesquisaUsuario((String) jC_Pesquisar_Por.getSelectedItem(), jT_Pesquisar_Usuario.getText(), ModeloTabela);
+        Modelo.setNumRows(0);
+        Usuario_C.controlePesquisaUsuario((String) jC_Pesquisar_Por.getSelectedItem(), jT_Pesquisar_Usuario.getText(), Modelo);
     }//GEN-LAST:event_jT_Pesquisar_UsuarioMouseClicked
 
     private void jT_Pesquisar_UsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jT_Pesquisar_UsuarioKeyPressed
-         ModeloTabela.setNumRows(0);
-        Usuario_C.controlePesquisaUsuario((String) jC_Pesquisar_Por.getSelectedItem(), jT_Pesquisar_Usuario.getText(), ModeloTabela);
+         Modelo.setNumRows(0);
+        Usuario_C.controlePesquisaUsuario((String) jC_Pesquisar_Por.getSelectedItem(), jT_Pesquisar_Usuario.getText(), Modelo);
     }//GEN-LAST:event_jT_Pesquisar_UsuarioKeyPressed
+
+    private void jC_Pesquisar_PorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jC_Pesquisar_PorActionPerformed
+       
+    }//GEN-LAST:event_jC_Pesquisar_PorActionPerformed
+
+    private void jTable_UsuarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_UsuarioMousePressed
+        try {
+
+//            editarPessoa(true);
+
+//            jButton_PESSOA_EDITAR.setEnabled(false);
+//            jButton_PESSOA_LIMPAR.setEnabled(true);
+//            jButton_PESSOA_SALVAR.setEnabled(false);
+//            jButton_PESSOA_NOVO_CADASTRO.setEnabled(false);
+
+            Usuario_M = Usuario_C.controlePreenchiementoPessoa(Integer.parseInt(Modelo.getValueAt(jTable_Usuario.getSelectedRow(), 0).toString()));
+
+            jT_Codigo_User.setText(Usuario_M.getCodigo_user() + "");
+
+            
+            String dataCadastro = Usuario_M.getData();
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+            Date c = formatter.parse(dataCadastro);
+            jD_Data_Cadastro.setDate(c);
+
+            jT_NomeUsuario.setText(Usuario_M.getNome());
+            jC_Setor.setSelectedItem(Usuario_M.getSetor());
+            jT_Login.setText(Usuario_M.getLogin());
+            jP_Senha.setText(Usuario_M.getSenha());
+            jCh_Sim.setText(String.valueOf(Usuario_M.getAdmin()));
+            jC_Status.setSelectedItem(Usuario_M.getStatus());
+            
+
+        } catch (ParseException ex) {
+            JOptionPane.showMessageDialog(null, "O ERRO ", "Preenchimento Obrigatório", 0);
+            Logger.getLogger(JFrame_Cadastro_Usuarios.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jTable_UsuarioMousePressed
 
     /**
      * @param args the command line arguments
